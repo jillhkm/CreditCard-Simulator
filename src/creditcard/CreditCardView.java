@@ -17,6 +17,9 @@ import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import business.Card;
+import java.util.ArrayList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  * The application's main frame.
@@ -111,16 +114,18 @@ public class CreditCardView extends FrameView {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jtxtCharge = new javax.swing.JTextField();
+        jtxtPmt = new javax.swing.JTextField();
+        jtxtcrInc = new javax.swing.JTextField();
+        jtxtIR = new javax.swing.JTextField();
+        jtxtDesc = new javax.swing.JTextField();
+        jbtnAddChg = new javax.swing.JButton();
+        jbtnPayment = new javax.swing.JButton();
+        jbtnCrInc = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jtxtAcctNo = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbtnNew = new javax.swing.JButton();
+        jbtnopen = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -158,30 +163,55 @@ public class CreditCardView extends FrameView {
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
 
-        jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
-        jTextField1.setName("jTextField1"); // NOI18N
+        jtxtCharge.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtxtCharge.setText(resourceMap.getString("jtxtCharge.text")); // NOI18N
+        jtxtCharge.setName("jtxtCharge"); // NOI18N
 
-        jTextField2.setText(resourceMap.getString("jTextField2.text")); // NOI18N
-        jTextField2.setName("jTextField2"); // NOI18N
+        jtxtPmt.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtxtPmt.setText(resourceMap.getString("jtxtPmt.text")); // NOI18N
+        jtxtPmt.setName("jtxtPmt"); // NOI18N
 
-        jTextField3.setText(resourceMap.getString("jTextField3.text")); // NOI18N
-        jTextField3.setName("jTextField3"); // NOI18N
+        jtxtcrInc.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtxtcrInc.setText(resourceMap.getString("jtxtcrInc.text")); // NOI18N
+        jtxtcrInc.setName("jtxtcrInc"); // NOI18N
 
-        jTextField4.setText(resourceMap.getString("jTextField4.text")); // NOI18N
-        jTextField4.setName("jTextField4"); // NOI18N
+        jtxtIR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtxtIR.setText(resourceMap.getString("jtxtIR.text")); // NOI18N
+        jtxtIR.setName("jtxtIR"); // NOI18N
 
-        jTextField5.setForeground(resourceMap.getColor("jTextField5.foreground")); // NOI18N
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setText(resourceMap.getString("jTextField5.text")); // NOI18N
-        jTextField5.setName("jTextField5"); // NOI18N
+        jtxtDesc.setForeground(resourceMap.getColor("jtxtDesc.foreground")); // NOI18N
+        jtxtDesc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtDesc.setText(resourceMap.getString("jtxtDesc.text")); // NOI18N
+        jtxtDesc.setName("jtxtDesc"); // NOI18N
 
-        jButton1.setBackground(resourceMap.getColor("jButton1.background")); // NOI18N
-        jButton1.setIcon(resourceMap.getIcon("jButton1.icon")); // NOI18N
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setMaximumSize(new java.awt.Dimension(21, 21));
-        jButton1.setMinimumSize(new java.awt.Dimension(21, 21));
-        jButton1.setName("jButton1"); // NOI18N
+        jbtnAddChg.setBackground(resourceMap.getColor("jbtnAddChg.background")); // NOI18N
+        jbtnAddChg.setIcon(resourceMap.getIcon("jbtnAddChg.icon")); // NOI18N
+        jbtnAddChg.setText(resourceMap.getString("jbtnAddChg.text")); // NOI18N
+        jbtnAddChg.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jbtnAddChg.setMaximumSize(new java.awt.Dimension(21, 21));
+        jbtnAddChg.setMinimumSize(new java.awt.Dimension(21, 21));
+        jbtnAddChg.setName("jbtnAddChg"); // NOI18N
+        jbtnAddChg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAddChgActionPerformed(evt);
+            }
+        });
+
+        jbtnPayment.setText(resourceMap.getString("jbtnPayment.text")); // NOI18N
+        jbtnPayment.setName("jbtnPayment"); // NOI18N
+        jbtnPayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPaymentActionPerformed(evt);
+            }
+        });
+
+        jbtnCrInc.setText(resourceMap.getString("jbtnCrInc.text")); // NOI18N
+        jbtnCrInc.setName("jbtnCrInc"); // NOI18N
+        jbtnCrInc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCrIncActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -196,37 +226,48 @@ public class CreditCardView extends FrameView {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4))
+                    .addComponent(jtxtCharge, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(jtxtPmt)
+                    .addComponent(jtxtcrInc)
+                    .addComponent(jtxtIR))
                 .addGap(18, 18, 18)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jbtnPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(131, 131, 131))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jtxtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnAddChg, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jbtnCrInc, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtnAddChg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jtxtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtPmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnPayment))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtcrInc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnCrInc))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtIR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -236,16 +277,21 @@ public class CreditCardView extends FrameView {
         jtxtAcctNo.setText(resourceMap.getString("jtxtAcctNo.text")); // NOI18N
         jtxtAcctNo.setName("jtxtAcctNo"); // NOI18N
 
-        jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
-        jButton3.setName("jButton3"); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbtnNew.setText(resourceMap.getString("jbtnNew.text")); // NOI18N
+        jbtnNew.setName("jbtnNew"); // NOI18N
+        jbtnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbtnNewActionPerformed(evt);
             }
         });
 
-        jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
-        jButton4.setName("jButton4"); // NOI18N
+        jbtnopen.setText(resourceMap.getString("jbtnopen.text")); // NOI18N
+        jbtnopen.setName("jbtnopen"); // NOI18N
+        jbtnopen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnopenActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(resourceMap.getColor("jPanel3.background")); // NOI18N
         jPanel3.setName("jPanel3"); // NOI18N
@@ -260,14 +306,17 @@ public class CreditCardView extends FrameView {
         jLabel8.setName("jLabel8"); // NOI18N
 
         jtxtCrRem.setEditable(false);
+        jtxtCrRem.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jtxtCrRem.setText(resourceMap.getString("jtxtCrRem.text")); // NOI18N
         jtxtCrRem.setName("jtxtCrRem"); // NOI18N
 
         jtxtBalDue.setEditable(false);
+        jtxtBalDue.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jtxtBalDue.setText(resourceMap.getString("jtxtBalDue.text")); // NOI18N
         jtxtBalDue.setName("jtxtBalDue"); // NOI18N
 
         jtxtCrLim.setEditable(false);
+        jtxtCrLim.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jtxtCrLim.setText(resourceMap.getString("jtxtCrLim.text")); // NOI18N
         jtxtCrLim.setName("jtxtCrLim"); // NOI18N
 
@@ -275,6 +324,11 @@ public class CreditCardView extends FrameView {
         jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton2.setName("jButton2"); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -327,9 +381,9 @@ public class CreditCardView extends FrameView {
                         .addGap(18, 18, 18)
                         .addComponent(jtxtAcctNo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(jbtnNew)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(jbtnopen)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -341,8 +395,8 @@ public class CreditCardView extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtxtAcctNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jbtnNew)
+                    .addComponent(jbtnopen))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -413,25 +467,125 @@ public class CreditCardView extends FrameView {
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNewActionPerformed
         statusMessageLabel.setText("");
-        NumberFormat curr = NumberFormat.getCurrencyInstance();
         cc = new Card();
         if (cc.getErrorMsg().isEmpty()) {
             jtxtAcctNo.setText(String.valueOf(cc.getAcctNo()));
+            DisplayValues();
+            statusMessageLabel.setText(cc.getActionMsg());          
         } else {
             statusMessageLabel.setText(cc.getErrorMsg());
+        }     
+    }//GEN-LAST:event_jbtnNewActionPerformed
+
+    private void jbtnAddChgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddChgActionPerformed
+        statusMessageLabel.setText("");
+        double amt;
+        try {
+            amt = Double.parseDouble(jtxtCharge.getText());
+        } catch (NumberFormatException e) {
+            statusMessageLabel.setText("Amount is not numeric.");
+            jtxtCharge.requestFocusInWindow();
+            return;
+        }
+        cc.setCharge(amt, jtxtDesc.getText());
+        if (!cc.getErrorMsg().isEmpty()) {
+            statusMessageLabel.setText(cc.getErrorMsg());
+        } else {
+            statusMessageLabel.setText(cc.getActionMsg());
+            DisplayValues();
         }
         
-        
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbtnAddChgActionPerformed
 
+    private void jbtnopenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnopenActionPerformed
+        statusMessageLabel.setText("");
+        long a;
+        try {
+            a = Long.parseLong(jtxtAcctNo.getText());
+            cc = new Card(a);
+            if (!cc.getErrorMsg().isEmpty()) {
+                statusMessageLabel.setText(cc.getErrorMsg());
+            } else {
+                statusMessageLabel.setText(cc.getActionMsg());
+                DisplayValues();
+            }
+        } catch (NumberFormatException e) {
+            statusMessageLabel.setText("Account number not legal.");
+        }
+    }//GEN-LAST:event_jbtnopenActionPerformed
+
+    private void jbtnPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPaymentActionPerformed
+        statusMessageLabel.setText("");
+        double p;
+        try {
+            p = Double.parseDouble(jtxtPmt.getText());
+        } catch (NumberFormatException e) {
+            statusMessageLabel.setText("Illegal or empty payment amount");
+            jtxtPmt.requestFocusInWindow();
+            return;
+        }
+        if (!cc.getErrorMsg().isEmpty()) {
+            statusMessageLabel.setText(cc.getActionMsg());
+            DisplayValues();
+        } else {
+            statusMessageLabel.setText(cc.getErrorMsg());
+        } //LOOK IN VIDEO
+        
+    }//GEN-LAST:event_jbtnPaymentActionPerformed
+
+    private void jbtnCrIncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCrIncActionPerformed
+        statusMessageLabel.setText("");
+        double crinc;
+        try {
+            crinc = Double.parseDouble(jtxtcrInc.getText());
+        } catch (NumberFormatException e) {
+            statusMessageLabel.setText("Illegal or Missing Increase Amount.");
+            return;
+        } 
+        cc.setCrIncrease(crinc);
+        if (!cc.getErrorMsg().isEmpty()) {
+                statusMessageLabel.setText(cc.getActionMsg());
+            } else {
+                statusMessageLabel.setText(cc.getErrorMsg());
+                DisplayValues();
+            }
+        jtxtcrInc.setText("");
+        jtxtcrInc.requestFocusInWindow();
+    }//GEN-LAST:event_jbtnCrIncActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        statusMessageLabel.setText("");
+        ArrayList<String> log = cc.getLog();
+        if (!cc.getErrorMsg().isEmpty()) {
+            statusMessageLabel.setText(cc.getErrorMsg());
+            return;
+        }
+        statusMessageLabel.setText(cc.getActionMsg());
+        JTextArea t = new JTextArea();
+        for (int i = 0; i <log.size(); i++) {
+            t.append(log.get(i) + "/n");
+        }
+        JScrollPane sp = new JScrollPane(t);
+        JDialog dg = new JDialog();
+        dg.add(sp);
+        dg.setTitle("Account History for " + cc.getAcctNo());
+        dg.setBounds(150, 400, 800, 300);
+        dg.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void DisplayValues() {
+        NumberFormat curr = NumberFormat.getCurrencyInstance();
+        jtxtCrLim.setText(curr.format(cc.getCreditLimit()));
+        jtxtBalDue.setText(curr.format(cc.getBalDue()));
+        jtxtCrRem.setText(curr.format(cc.getCrAvail()));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -442,15 +596,20 @@ public class CreditCardView extends FrameView {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton jbtnAddChg;
+    private javax.swing.JButton jbtnCrInc;
+    private javax.swing.JButton jbtnNew;
+    private javax.swing.JButton jbtnPayment;
+    private javax.swing.JButton jbtnopen;
     private javax.swing.JTextField jtxtAcctNo;
     private javax.swing.JTextField jtxtBalDue;
+    private javax.swing.JTextField jtxtCharge;
     private javax.swing.JTextField jtxtCrLim;
     private javax.swing.JTextField jtxtCrRem;
+    private javax.swing.JTextField jtxtDesc;
+    private javax.swing.JTextField jtxtIR;
+    private javax.swing.JTextField jtxtPmt;
+    private javax.swing.JTextField jtxtcrInc;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
