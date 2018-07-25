@@ -17,6 +17,8 @@ import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import business.Card;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -122,6 +124,7 @@ public class CreditCardView extends FrameView {
         jbtnAddChg = new javax.swing.JButton();
         jbtnPayment = new javax.swing.JButton();
         jbtnCrInc = new javax.swing.JButton();
+        jbtnchInt = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jtxtAcctNo = new javax.swing.JTextField();
         jbtnNew = new javax.swing.JButton();
@@ -133,7 +136,7 @@ public class CreditCardView extends FrameView {
         jtxtCrRem = new javax.swing.JTextField();
         jtxtBalDue = new javax.swing.JTextField();
         jtxtCrLim = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jbtngetLog = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -166,23 +169,65 @@ public class CreditCardView extends FrameView {
         jtxtCharge.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jtxtCharge.setText(resourceMap.getString("jtxtCharge.text")); // NOI18N
         jtxtCharge.setName("jtxtCharge"); // NOI18N
+        jtxtCharge.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxtChargeKeyPressed(evt);
+            }
+        });
 
         jtxtPmt.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jtxtPmt.setText(resourceMap.getString("jtxtPmt.text")); // NOI18N
         jtxtPmt.setName("jtxtPmt"); // NOI18N
+        jtxtPmt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxtPmtKeyPressed(evt);
+            }
+        });
 
         jtxtcrInc.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jtxtcrInc.setText(resourceMap.getString("jtxtcrInc.text")); // NOI18N
         jtxtcrInc.setName("jtxtcrInc"); // NOI18N
+        jtxtcrInc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxtcrIncKeyPressed(evt);
+            }
+        });
 
-        jtxtIR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtxtIR.setForeground(resourceMap.getColor("jtxtIR.foreground")); // NOI18N
+        jtxtIR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtIR.setText(resourceMap.getString("jtxtIR.text")); // NOI18N
         jtxtIR.setName("jtxtIR"); // NOI18N
+        jtxtIR.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtIRFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtIRFocusLost(evt);
+            }
+        });
+        jtxtIR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxtIRKeyPressed(evt);
+            }
+        });
 
         jtxtDesc.setForeground(resourceMap.getColor("jtxtDesc.foreground")); // NOI18N
         jtxtDesc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtDesc.setText(resourceMap.getString("jtxtDesc.text")); // NOI18N
         jtxtDesc.setName("jtxtDesc"); // NOI18N
+        jtxtDesc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtDescfocusGain(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtDescFocusLost(evt);
+            }
+        });
+        jtxtDesc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxtDescKeyPressed(evt);
+            }
+        });
 
         jbtnAddChg.setBackground(resourceMap.getColor("jbtnAddChg.background")); // NOI18N
         jbtnAddChg.setIcon(resourceMap.getIcon("jbtnAddChg.icon")); // NOI18N
@@ -210,6 +255,14 @@ public class CreditCardView extends FrameView {
         jbtnCrInc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnCrIncActionPerformed(evt);
+            }
+        });
+
+        jbtnchInt.setText(resourceMap.getString("jbtnchInt.text")); // NOI18N
+        jbtnchInt.setName("jbtnchInt"); // NOI18N
+        jbtnchInt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnchIntActionPerformed(evt);
             }
         });
 
@@ -241,7 +294,8 @@ public class CreditCardView extends FrameView {
                                 .addComponent(jtxtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbtnAddChg, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jbtnCrInc, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jbtnCrInc, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtnchInt))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -267,7 +321,8 @@ public class CreditCardView extends FrameView {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jtxtIR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtIR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnchInt))
                 .addContainerGap())
         );
 
@@ -320,13 +375,13 @@ public class CreditCardView extends FrameView {
         jtxtCrLim.setText(resourceMap.getString("jtxtCrLim.text")); // NOI18N
         jtxtCrLim.setName("jtxtCrLim"); // NOI18N
 
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.setName("jButton2"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtngetLog.setText(resourceMap.getString("jbtngetLog.text")); // NOI18N
+        jbtngetLog.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jbtngetLog.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jbtngetLog.setName("jbtngetLog"); // NOI18N
+        jbtngetLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtngetLogActionPerformed(evt);
             }
         });
 
@@ -346,7 +401,7 @@ public class CreditCardView extends FrameView {
                     .addComponent(jtxtBalDue)
                     .addComponent(jtxtCrRem))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtngetLog, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
         jPanel3Layout.setVerticalGroup(
@@ -360,7 +415,7 @@ public class CreditCardView extends FrameView {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jtxtBalDue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jbtngetLog))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -496,6 +551,10 @@ public class CreditCardView extends FrameView {
             statusMessageLabel.setText(cc.getActionMsg());
             DisplayValues();
         }
+        jtxtDesc.setText("Description of Charge");
+        jtxtDesc.setForeground(Color.LIGHT_GRAY);
+        jtxtCharge.setText("");
+        jtxtCharge.requestFocusInWindow();
         
     }//GEN-LAST:event_jbtnAddChgActionPerformed
 
@@ -517,6 +576,12 @@ public class CreditCardView extends FrameView {
     }//GEN-LAST:event_jbtnopenActionPerformed
 
     private void jbtnPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPaymentActionPerformed
+        if (jtxtAcctNo.getText().isEmpty()) {
+            statusMessageLabel.setText("Payment attempted on inactive account");
+            jtxtAcctNo.requestFocusInWindow();
+            jtxtPmt.setText("");
+            return;
+        }
         statusMessageLabel.setText("");
         double p;
         try {
@@ -526,17 +591,27 @@ public class CreditCardView extends FrameView {
             jtxtPmt.requestFocusInWindow();
             return;
         }
-        if (!cc.getErrorMsg().isEmpty()) {
+        cc.setPayment(p);
+        if (cc.getErrorMsg().isEmpty()) {
             statusMessageLabel.setText(cc.getActionMsg());
             DisplayValues();
         } else {
             statusMessageLabel.setText(cc.getErrorMsg());
-        } //LOOK IN VIDEO
+        }
+        jtxtPmt.setText("");
+        jtxtPmt.requestFocusInWindow();
         
     }//GEN-LAST:event_jbtnPaymentActionPerformed
 
     private void jbtnCrIncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCrIncActionPerformed
         statusMessageLabel.setText("");
+        if (jtxtAcctNo.getText().isEmpty()) {
+            statusMessageLabel.setText("Increase attempted on inactive account");
+            jtxtAcctNo.requestFocusInWindow();
+            jtxtcrInc.setText("(6% = 0.06)");
+            jtxtcrInc.setForeground(Color.LIGHT_GRAY);
+            return;
+        }
         double crinc;
         try {
             crinc = Double.parseDouble(jtxtcrInc.getText());
@@ -544,18 +619,24 @@ public class CreditCardView extends FrameView {
             statusMessageLabel.setText("Illegal or Missing Increase Amount.");
             return;
         } 
-        cc.setCrIncrease(crinc);
-        if (!cc.getErrorMsg().isEmpty()) {
+        int x = ((int)Math.round(crinc));
+        cc.setCrIncrease(x);
+        if (cc.getErrorMsg().isEmpty()) {
                 statusMessageLabel.setText(cc.getActionMsg());
+                DisplayValues();
             } else {
                 statusMessageLabel.setText(cc.getErrorMsg());
-                DisplayValues();
+                
             }
         jtxtcrInc.setText("");
         jtxtcrInc.requestFocusInWindow();
     }//GEN-LAST:event_jbtnCrIncActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbtngetLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtngetLogActionPerformed
+        if (jtxtAcctNo.getText().isEmpty()) {
+            statusMessageLabel.setText("Log requested on inactive account");
+            return;
+        }
         statusMessageLabel.setText("");
         ArrayList<String> log = cc.getLog();
         if (!cc.getErrorMsg().isEmpty()) {
@@ -565,7 +646,7 @@ public class CreditCardView extends FrameView {
         statusMessageLabel.setText(cc.getActionMsg());
         JTextArea t = new JTextArea();
         for (int i = 0; i <log.size(); i++) {
-            t.append(log.get(i) + "/n");
+            t.append(log.get(i) + "\n");
         }
         JScrollPane sp = new JScrollPane(t);
         JDialog dg = new JDialog();
@@ -575,7 +656,81 @@ public class CreditCardView extends FrameView {
         dg.setVisible(true);
         
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbtngetLogActionPerformed
+
+    private void jbtnchIntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnchIntActionPerformed
+        statusMessageLabel.setText("");
+        double i;
+        try {
+            i = Double.parseDouble(jtxtIR.getText());
+        } catch (NumberFormatException e) {
+            statusMessageLabel.setText("Illegal or empty payment amount");
+            jtxtIR.requestFocusInWindow();
+            return;
+        }
+        cc.chargeInt(i);
+        if (cc.getErrorMsg().isEmpty()) {
+            statusMessageLabel.setText(cc.getActionMsg());
+            DisplayValues();
+        } else {
+            statusMessageLabel.setText(cc.getErrorMsg());
+        }
+        jtxtIR.setText("(6% = 0.06)");
+        jtxtIR.setForeground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jbtnchIntActionPerformed
+
+    private void jtxtIRFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtIRFocusGained
+        jtxtIR.setText("");
+        jtxtIR.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtxtIRFocusGained
+
+    private void jtxtDescfocusGain(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDescfocusGain
+        jtxtDesc.setText("");
+        jtxtDesc.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtxtDescfocusGain
+
+    private void jtxtChargeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtChargeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jtxtDesc.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_jtxtChargeKeyPressed
+
+    private void jtxtDescFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDescFocusLost
+        if (jtxtDesc.getText().isEmpty()) {
+            jtxtDesc.setText("Description of Charge");
+            jtxtDesc.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_jtxtDescFocusLost
+
+    private void jtxtDescKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbtnAddChg.doClick();
+        }
+    }//GEN-LAST:event_jtxtDescKeyPressed
+
+    private void jtxtPmtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPmtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbtnPayment.doClick();
+        }
+    }//GEN-LAST:event_jtxtPmtKeyPressed
+
+    private void jtxtIRFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtIRFocusLost
+        if (jtxtIR.getText().isEmpty()) {
+            jtxtIR.setText("(6% = 0.06)");
+        }
+    }//GEN-LAST:event_jtxtIRFocusLost
+
+    private void jtxtIRKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtIRKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbtnchInt.doClick();
+        }
+    }//GEN-LAST:event_jtxtIRKeyPressed
+
+    private void jtxtcrIncKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcrIncKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbtnCrInc.doClick();
+        }
+    }//GEN-LAST:event_jtxtcrIncKeyPressed
 
     private void DisplayValues() {
         NumberFormat curr = NumberFormat.getCurrencyInstance();
@@ -584,8 +739,9 @@ public class CreditCardView extends FrameView {
         jtxtCrRem.setText(curr.format(cc.getCrAvail()));
     }
     
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -600,6 +756,8 @@ public class CreditCardView extends FrameView {
     private javax.swing.JButton jbtnCrInc;
     private javax.swing.JButton jbtnNew;
     private javax.swing.JButton jbtnPayment;
+    private javax.swing.JButton jbtnchInt;
+    private javax.swing.JButton jbtngetLog;
     private javax.swing.JButton jbtnopen;
     private javax.swing.JTextField jtxtAcctNo;
     private javax.swing.JTextField jtxtBalDue;
