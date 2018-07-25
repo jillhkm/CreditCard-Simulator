@@ -24,7 +24,7 @@ import java.util.Random;
  */
 public class Card {
     private double climit, baldue;
-    private long acctno;
+    private long acctno = 0;
     private String errmsg, actionmsg;
     NumberFormat curr = NumberFormat.getCurrencyInstance();
     
@@ -115,7 +115,7 @@ public class Card {
     public void setCharge(double amt, String desc) {
         this.errmsg = "";
         this.actionmsg = "";
-        if (this.acctno <= 0) {
+        if (!(this.acctno > 0)) {
             this.errmsg = "Charge attempted on unopened account.";
             return;
         }
@@ -172,7 +172,7 @@ public class Card {
         }
         try {
             BufferedReader in = new BufferedReader(
-                    new FileReader("CLL" + this.acctno + ".txt"));
+                    new FileReader("CCL" + this.acctno + ".txt"));
             String s = in.readLine();
             while (s != null) {
                 log.add(s);
@@ -190,15 +190,15 @@ public class Card {
     public void setPayment(double p) {
         this.errmsg = "";
         this.actionmsg = "";
-        if (this.acctno <= 0) {
+        if (!(this.acctno > 0)) {
             this.errmsg = "Payment attempt on non-active account.";
             return;
         }
         if (p <= 0) {
-            this.actionmsg = "Payment declinedL must be positive value.";
+            this.actionmsg = "Payment declined must be positive value.";
             writeLog(this.actionmsg);
         } else {
-            //acception payment...
+            //accepting payment...
             this.baldue -= p;
             if (writeStatus()) {
                 this.actionmsg = "Payment of " + curr.format(p) + " posted.";
@@ -209,26 +209,45 @@ public class Card {
         }
     }
     
-    public void setCrIncrease(double crinc) {
+    public void setCrIncrease(int crinc) {
         this.errmsg = "";
         this.actionmsg = "";
-        if (this.acctno <= 0) {
+        if (!(this.acctno > 0)) {
             this.errmsg = "Increase requested on non-active account";
             return;
         }
-        if (crinc <= 0) {
-            this.actionmsg = "Increased declined, must be a postive value";
+        if (crinc < 49) {
+            this.actionmsg = "Increased declined, increase requested must be at least $100.00";
             writeLog(this.actionmsg);
-        } else if ((crinc % 100) != 0) {
-           //hidden extra credit = round to the nearest 100
-            this.actionmsg = "Increased declined = not a multiple of 100";
-            writeLog(this.actionmsg);
+            return;
         } else {
+            if ((crinc % 100) != 0) {
+                //extra credit
+                crinc = rounder(crinc);
+                this.actionmsg = "Inital request not a multiple of 100, "
+                        + "rounded to: " + curr.format(crinc);
+                writeLog(this.actionmsg);
+            }
             Random r = new Random();
             int x = r.nextInt(10)+1;
-            if (x <= 6) {
-                this.actionmsg = "Increase of" + crinc +" declined at this time.";
+            if (x <= 3) {
+                this.actionmsg = "Increase of " + curr.format(crinc) 
+                        +" declined at this time.";
                 writeLog(this.actionmsg);
+            } else if (x > 4 && x < 8) {
+                //adding chance of smaller increase being granted, just for fun please ignore
+                crinc = crinc/2;
+                this.actionmsg = "Currently, we can only offer an increase of: " 
+                        + curr.format(crinc);
+                writeLog(this.actionmsg);
+                this.climit += crinc;
+                if (writeStatus()) {
+                    this.actionmsg = "Increase of " + curr.format(crinc) +
+                            " is granted.";
+                    writeLog(this.actionmsg);
+                } else {
+                    this.climit -= crinc;
+                }
             } else {
                 this.climit += crinc;
                 if (writeStatus()) {
@@ -242,5 +261,40 @@ public class Card {
         }
         
     }
+    
+    public void chargeInt(double I) {
+        this.errmsg = "";
+        this.actionmsg = "";
+        if (!(this.acctno > 0)) {
+            this.errmsg = "Interest charge attempted on non-active account";
+            return;
+        }
+        if (I <= 0) {
+            this.actionmsg = "Interest charge not possible, rate must be positive";
+            writeLog(this.actionmsg);
+        } else {
+            //accepting interest
+            this.baldue *= (1 + (I/12));
+            if(writeStatus()) {
+                this.actionmsg = "Monthly interest charge added.";
+                writeLog(this.actionmsg);
+            } else {
+                this.baldue /= (1 + (I/12));
+            }
+        }
+    }
+    
+    private int rounder(int n) {
+        
+        // Smaller multiple
+        int a = (n / 100) * 100;
+          
+        // Larger multiple
+        int b = a + 100;
+      
+        // Return of closest of two
+        return (n - a > b - n)? b : a;
+    }
+ 
     
 }//end of class
